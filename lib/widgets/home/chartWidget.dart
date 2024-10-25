@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ChartWidgetContainer extends StatelessWidget {
-  const ChartWidgetContainer({super.key});
+class UpcomingEventWidget extends StatelessWidget {
+  const UpcomingEventWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

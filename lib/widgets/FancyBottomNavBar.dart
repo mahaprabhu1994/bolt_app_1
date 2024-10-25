@@ -8,13 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FancyBottomNavBar extends StatelessWidget {
   final List<IconData> icons;
-  final List<String> labels;
+  // final List<String> labels;
   final List<int> indexNo;
 
   const FancyBottomNavBar({
     super.key,
     required this.icons,
-    required this.labels, required this.indexNo,
+    // required this.labels,
+    required this.indexNo,
   });
 
   @override
@@ -22,7 +23,7 @@ class FancyBottomNavBar extends StatelessWidget {
     return BlocBuilder<BottomNavBloc, BottomNavState>(
       builder: (context, state) {
         return Container(
-          height: 75,
+          height: 55,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
@@ -64,7 +65,7 @@ class FancyBottomNavBar extends StatelessWidget {
                         size: 28,
                       ),
                        const SizedBox(height: 4),
-                      Text('${labels[index]}'),
+                      // Text('${labels[index]}'),
                     ],
                   ),
                 ),

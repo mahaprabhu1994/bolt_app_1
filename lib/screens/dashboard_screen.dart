@@ -15,67 +15,18 @@ class DashBoardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-       return Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 65),
-              child:
-
-              Column(
-                children: [
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 336,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Hi, Salim!',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontFamily: 'Manrope',
-                                  fontWeight: FontWeight.w800,
-                                  height: 0.06,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Scaffold.of(context).openDrawer();
-                                },
-                                child: Container(
-                                  width: 40, // Adjust size as needed
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                      image:
-                                      AssetImage('assets/images/menu2.png'),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                  ),
-
-                ],
-              ),
+       return Padding(
+         padding: const EdgeInsets.only(top: 30),
+         child: Center(
+           child: Column(
+              children: [
+                UpcomingEventWidget(),
+                // const EventSliderWidget(),
+                // const UpcomingEventsCard(),
+              ],
             ),
-
-
-            ChartWidgetContainer(),
-            // const EventSliderWidget(),
-            // const UpcomingEventsCard(),
-          ],
-        );
+         ),
+       );
     }
 
 
