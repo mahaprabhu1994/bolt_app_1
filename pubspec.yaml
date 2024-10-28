@@ -43,6 +43,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  http: ^1.2.0
+  equatable: ^2.0.5
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -73,6 +77,7 @@ flutter:
     - assets/images/client_1.jpeg
     - assets/images/client_2.jpeg
     - assets/images/client_3.jpeg
+    - assets/images/ava.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

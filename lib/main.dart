@@ -1,5 +1,8 @@
 import 'package:bold1/blocs/bottom_nav_bloc.dart';
+import 'package:bold1/blocs/client/client_bloc.dart';
+import 'package:bold1/blocs/client/client_repository.dart';
 import 'package:bold1/blocs/drawer_page_bloc.dart';
+import 'package:bold1/blocs/login/login_bloc.dart';
 import 'package:bold1/blocs/tab/tab_bloc.dart';
 import 'package:bold1/screens/client_screen.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +55,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => DrawerPageBloc(),
         ),
+        BlocProvider(
+          create: (_) => LoginBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ClientBloc(
+            repository: ClientRepository(),
+          ),
+        ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, themeState) {
@@ -62,7 +73,7 @@ class MyApp extends StatelessWidget {
             routes: {
               '/login': (context) => const LoginScreen(),
               '/home': (context) => HomeScreen(),
-              '/client': (context) => ClientScreen(),
+              // '/client': (context) => ClientScreen(),
             },
           );
         },

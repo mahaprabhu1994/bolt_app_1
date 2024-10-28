@@ -1,6 +1,9 @@
+import 'package:bold1/blocs/login/login_bloc.dart';
+import 'package:bold1/blocs/login/login_state.dart';
 import 'package:bold1/widgets/client_page/client_list_widget.dart';
 import 'package:bold1/widgets/client_page/search_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ClientScreen extends StatelessWidget {
   const ClientScreen({super.key});
@@ -13,17 +16,29 @@ class ClientScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SearchWidget(),
-                ElevatedButton.icon(
-                    onPressed: () {
-                      print('filter clicked');
-                    },
-                    label: Icon(Icons.filter_list))
-              ],
-            ),
+            child: BlocBuilder<LoginBloc,LoginState>(
+    builder:(context,logstate)
+    {
+      // Get the adviser name from login state
+      final String adviserId = logstate is LoginSuccess
+          ? logstate.loginResponse.adviserId ?? 'N/A'
+          : 'N/A';
+      //String advisor = logstate.loginResponse.adviserId;
+      return
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SearchWidget(adviserId:adviserId),
+            ElevatedButton.icon(
+                onPressed: () {
+                  print('filter clicked');
+                },
+                label: Icon(Icons.filter_list))
+          ],
+        );
+    })
+
+
           ),
           // FilterSliderWidget(),
           SizedBox.fromSize(
@@ -51,9 +66,9 @@ class ClientScreen extends StatelessWidget {
           SizedBox.fromSize(
             size: Size.fromHeight(20.0),
           ),
-          ClientListWidget(),
-          ClientListWidget(),
-          ClientListWidget(),
+          // ClientListWidget(),
+          // ClientListWidget(),
+          // ClientListWidget(),
         ],
       ),
     );
