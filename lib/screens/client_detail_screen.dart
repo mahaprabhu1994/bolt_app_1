@@ -2,16 +2,35 @@
 import 'package:bold1/blocs/client/client_modal.dart';
 import 'package:bold1/blocs/theme_bloc.dart';
 import 'package:bold1/main.dart';
+import 'package:bold1/widgets/expandable_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ClientDetailScreen extends StatelessWidget {
+class ClientDetailScreen extends StatefulWidget {
   final Client client;
 
   const ClientDetailScreen({
     super.key,
     required this.client,
   });
+
+  @override
+  State<ClientDetailScreen> createState() => _ClientDetailScreenState();
+}
+
+class _ClientDetailScreenState extends State<ClientDetailScreen> {
+
+  final _cardController = ExpandableCardController();
+  final _subCardController = SubExpandableCardController();
+
+  @override
+  void dispose() {
+    _cardController.dispose();
+    _subCardController.dispose();
+    super.dispose();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +70,7 @@ class ClientDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      client.custName,
+                      widget.client.custName,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -61,62 +80,161 @@ class ClientDetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // Client Information Cards
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              Column(
+                children: [
+                  // Personal Details Card
+                  ExpandableInfoCard(
+                    title: 'Personal Details',
+                    controller: _cardController,
+                    expandedHeight: 340,
+                    initiallyExpanded: true, // Optional: starts expanded
                     children: [
-                      Text(
-                        'Basic Information',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Divider(),
-                      if(client.custInitials !=null)
-                        _buildInfoRow('Initial', client.custInitials!),
-                      _buildInfoRow('Email', client.emailId),
-                      _buildInfoRow('Category', client.custCateg),
-                      _buildInfoRow('Status', client.custStatus),
-                      // if (client.emailId != null)
-                      //   _buildInfoRow('Mobile', client.emailId!),
-                      // if (client.custCateg != null)
-                      //   _buildInfoRow('Address', client.custCateg!),
-                      if (client.dob != null)
-                        _buildInfoRow('DOB', client.dob!),
-                      if (client.sex != null)
-                        _buildInfoRow('Gender', client.sex!),
-                      // _buildInfoRow('DOB',client.dob),
-                      // _buildInfoRow('Gender',client.sex),
-
+                      if (widget.client.custInitials != null)
+                        buildInfoRow('Initial', widget.client.custInitials!),
+                      buildInfoRow('Email', widget.client.emailId),
+                      buildInfoRow('Category', widget.client.custCateg),
+                      buildInfoRow('Status', widget.client.custStatus),
+                      if (widget.client.dob != null)
+                        buildInfoRow('DOB', widget.client.dob!),
+                      if (widget.client.sex != null)
+                        buildInfoRow('Gender', widget.client.sex!),
+                      if (widget.client.nric != null)
+                        buildInfoRow('NRIC', widget.client.nric!),
+                      if (widget.client.nationality != null)
+                        buildInfoRow('Nationality', widget.client.nationality!),
+                      if (widget.client.maritalStatus != null)
+                        buildInfoRow('MaritalStatus', widget.client.maritalStatus!),
                     ],
                   ),
-                ),
-              ),
-              const SizedBox(height: 16),
 
-              // Additional Details Card
-              if (client.custStatus != null)
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Additional Information',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Divider(),
-                        Text(client.custStatus!),
-                      ],
-                    ),
+                  const SizedBox(height: 16),
+
+                  // Address Details Card
+                  // if (widget.client.custStatus != null)
+                  // ExpandableInfoCard(
+                  //   title: 'Address Details',
+                  //   controller: _cardController,
+                  //   expandedHeight: 600,
+                  //   children: [
+                  //     SubExpandableInfoCard(
+                  //       title: 'Residence Address (Primary)',
+                  //       controller: _subCardController,
+                  //       expandedHeight: 400,
+                  //       children: [
+                  //         subBuildInfoRow('Street', widget.client.dob ?? ''),
+                  //         subBuildInfoRow('City', widget.client.dob ?? ''),
+                  //         subBuildInfoRow('State', widget.client.dob ?? ''),
+                  //         subBuildInfoRow('Postal Code', widget.client.dob ?? ''),
+                  //       ],
+                  //     ),
+                  //     const SizedBox(height: 8),
+                  //     SubExpandableInfoCard(
+                  //       title: 'Office Address',
+                  //       controller: _subCardController,
+                  //       expandedHeight: 400,
+                  //       children: [
+                  //         subBuildInfoRow('Street', widget.client.dob ?? ''),
+                  //         subBuildInfoRow('City', widget.client.dob ?? ''),
+                  //         subBuildInfoRow('State', widget.client.dob ?? ''),
+                  //         subBuildInfoRow('Postal Code', widget.client.dob ?? ''),
+                  //       ],
+                  //     ),
+                  //     const SizedBox(height: 8),
+                  //     SubExpandableInfoCard(
+                  //       title: 'Correspondence Address',
+                  //       controller: _subCardController,
+                  //       expandedHeight: 400,
+                  //       children: [
+                  //         subBuildInfoRow('Street', widget.client.dob ?? ''),
+                  //         subBuildInfoRow('City', widget.client.dob ?? ''),
+                  //         subBuildInfoRow('State', widget.client.dob ?? ''),
+                  //         subBuildInfoRow('Postal Code', widget.client.dob ?? ''),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
+
+                  ExpandableInfoCard(
+                    title: 'Address Details',
+                    controller: _cardController,
+                    expandedHeight: 340, // Increased to accommodate all sub-cards
+                    children: [
+                      SubExpandableInfoCard(
+                        title: 'Residence Address (Primary)',
+                        controller: _subCardController,
+                        expandedHeight: 260, // Adjusted for content
+                        children: [
+                          subBuildInfoRow('Address 1', widget.client.resAddr1 ?? ''),
+                          subBuildInfoRow('Address 2', widget.client.resAddr2 ?? ''),
+                          subBuildInfoRow('Address 3', widget.client.resAddr3 ?? ''),
+                          subBuildInfoRow('Address 4', widget.client.resAddr4 ?? ''),
+                          subBuildInfoRow('City', widget.client.resCity ?? ''),
+                          subBuildInfoRow('Postalcode', widget.client.resPostalcode ?? ''),
+                          subBuildInfoRow('State', widget.client.resState ?? ''),
+                          subBuildInfoRow('Country', widget.client.resCountry ?? '')
+                        ],
+                      ),
+                      SubExpandableInfoCard(
+                        title: 'Office Address',
+                        controller: _subCardController,
+                        expandedHeight: 270, // Adjusted for content
+                        children: [
+                          subBuildInfoRow('Address 1', widget.client.offAddr1 ?? ''),
+                          subBuildInfoRow('Address 2', widget.client.offAddr2 ?? ''),
+                          subBuildInfoRow('Address 3', widget.client.offAddr3 ?? ''),
+                          subBuildInfoRow('Address 4', widget.client.offAddr4 ?? ''),
+                          subBuildInfoRow('City', widget.client.offCity ?? ''),
+                          subBuildInfoRow('Postalcode', widget.client.offPostalcode ?? ''),
+                          subBuildInfoRow('State', widget.client.offState ?? ''),
+                          subBuildInfoRow('Country', widget.client.offCountry ?? ''),
+
+                        ],
+                      ),
+                      SubExpandableInfoCard(
+                        title: 'Correspondence Address',
+                        controller: _subCardController,
+                        expandedHeight: 270, // Adjusted for content
+                        children: [
+                          subBuildInfoRow('Address 1', widget.client.corAddr1 ?? ''),
+                          subBuildInfoRow('Address 2', widget.client.corAddr2 ?? ''),
+                          subBuildInfoRow('Address 3', widget.client.corAddr3 ?? ''),
+                          subBuildInfoRow('Address 4', widget.client.corAddr4 ?? ''),
+                          subBuildInfoRow('City', widget.client.corCity ?? ''),
+                          subBuildInfoRow('Postalcode', widget.client.corPostalcode ?? ''),
+                          subBuildInfoRow('State', widget.client.corState ?? ''),
+                          subBuildInfoRow('Country', widget.client.corCountry ?? ''),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
+
+                  const SizedBox(height: 16),
+
+                  // Contact Details Card
+                  ExpandableInfoCard(
+                    title: 'Contact Details',
+                    controller: _cardController,
+                    expandedHeight: 400,
+                    children: [
+                      //buildInfoRow('Phone', client.phoneNumber ?? ''), // Add your contact fields
+                      //buildInfoRow('Mobile', client.mobileNumber ?? ''),
+                      //buildInfoRow('Work Email', client.workEmail ?? ''),
+                      // Add more contact details as needed
+                        buildInfoRow('Res-Phone', widget.client.resPh!),
+                        buildInfoRow('Res-HandPhone', widget.client.resHandPhone!),
+                        buildInfoRow('Res-Fax', widget.client.resFax!),
+
+                        buildInfoRow('Office-Phone', widget.client.offPh!),
+                        buildInfoRow('Office-HandPhone', widget.client.offHandPhone!),
+                        buildInfoRow('Office-Fax', widget.client.offFax!),
+
+                        buildInfoRow('Other-Phone', widget.client.othPh!),
+                        buildInfoRow('Other-HandPhone', widget.client.othHandPhone!),
+                        buildInfoRow('Other-Fax', widget.client.othFax!),
+                    ],
+                  ),
+                ],
+              )
             ],
           ),
         ),

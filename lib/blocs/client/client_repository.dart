@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import '../../api_constants.dart';
 class ClientRepository {
-  final String baseUrl = 'http://192.168.1.117:8080/FPMSSERVICE';
+  final String Url = ApiConstants.baseUrl;
 
   Future<Map<String, dynamic>> fetchClients({
     required String adviserId,
@@ -22,7 +22,7 @@ class ClientRepository {
       };
 
       final uri = Uri.parse(
-          '$baseUrl/listCustomersByAdviserId/$adviserId'
+          '$Url/listCustomersByAdviserId/$adviserId'
       ).replace(queryParameters: queryParams);
 
       final response = await http.get(uri);

@@ -33,7 +33,7 @@ class LoginBloc extends Bloc<LoginEvent,LoginState> {
         ///////////////////////////////////////////////
         //for cloud validation
         final response = await http.post(Uri.parse(
-            '${ApiConstants.baseUrl}/FPMSSERVICE/loginValidate?userId=${event.userId}&password=${event.password}'));
+            '${ApiConstants.baseUrl}/loginValidate?userId=${event.userId}&password=${event.password}'));
         print('username&passsword------------>${event.userId}&password=${event.password}');
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);
