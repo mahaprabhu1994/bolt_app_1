@@ -1,11 +1,11 @@
 
 
-import 'package:bold1/blocs/client/client_bloc.dart';
-import 'package:bold1/blocs/client/client_event.dart';
-import 'package:bold1/blocs/client/client_state.dart';
-import 'package:bold1/main.dart';
-import 'package:bold1/widgets/client_page/client_list_widget.dart';
-import 'package:bold1/widgets/client_page/client_search_section.dart';
+import 'package:avallis/blocs/client/client_bloc.dart';
+import 'package:avallis/blocs/client/client_event.dart';
+import 'package:avallis/blocs/client/client_state.dart';
+import 'package:avallis/main.dart';
+import 'package:avallis/widgets/client_page/client_list_widget.dart';
+import 'package:avallis/widgets/client_page/client_search_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

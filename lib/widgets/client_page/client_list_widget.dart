@@ -1,9 +1,9 @@
 
 import 'dart:math';
 
-import 'package:bold1/blocs/client/client_modal.dart';
-import 'package:bold1/blocs/theme_bloc.dart';
-import 'package:bold1/screens/client_detail_screen.dart';
+import 'package:avallis/blocs/client/client_modal.dart';
+import 'package:avallis/blocs/theme_bloc.dart';
+import 'package:avallis/screens/client_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
 
 
-import 'package:bold1/blocs/login/login_modal.dart';
+import 'package:avallis/blocs/login/login_modal.dart';
 
 abstract class LoginState {}
 

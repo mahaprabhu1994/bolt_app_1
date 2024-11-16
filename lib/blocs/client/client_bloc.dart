@@ -1,7 +1,7 @@
-import 'package:bold1/blocs/client/client_event.dart';
-import 'package:bold1/blocs/client/client_modal.dart';
-import 'package:bold1/blocs/client/client_repository.dart';
-import 'package:bold1/blocs/client/client_state.dart';
+import 'package:avallis/blocs/client/client_event.dart';
+import 'package:avallis/blocs/client/client_modal.dart';
+import 'package:avallis/blocs/client/client_repository.dart';
+import 'package:avallis/blocs/client/client_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ClientBloc extends Bloc<ClientEvent, ClientState> {

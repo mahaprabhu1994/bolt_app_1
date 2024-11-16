@@ -1,7 +1,7 @@
-import 'package:bold1/blocs/login/login_bloc.dart';
-import 'package:bold1/blocs/login/login_state.dart';
-import 'package:bold1/widgets/client_page/client_list_widget.dart';
-import 'package:bold1/widgets/client_page/search_widget.dart';
+import 'package:avallis/blocs/login/login_bloc.dart';
+import 'package:avallis/blocs/login/login_state.dart';
+import 'package:avallis/widgets/client_page/client_list_widget.dart';
+import 'package:avallis/widgets/client_page/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +33,7 @@ class ClientScreen extends StatelessWidget {
                 onPressed: () {
                   print('filter clicked');
                 },
-                label: Icon(Icons.filter_list))
+                label: const Icon(Icons.filter_list))
           ],
         );
     })
@@ -42,12 +42,12 @@ class ClientScreen extends StatelessWidget {
           ),
           // FilterSliderWidget(),
           SizedBox.fromSize(
-            size: Size.fromHeight(120.0),
+            size: const Size.fromHeight(120.0),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             child: Container(
-                child: Row(
+                child: const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
@@ -64,7 +64,7 @@ class ClientScreen extends StatelessWidget {
             )),
           ),
           SizedBox.fromSize(
-            size: Size.fromHeight(20.0),
+            size: const Size.fromHeight(20.0),
           ),
           // ClientListWidget(),
           // ClientListWidget(),

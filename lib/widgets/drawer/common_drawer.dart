@@ -1,5 +1,5 @@
-import 'package:bold1/blocs/tab/tab_bloc.dart';
-import 'package:bold1/blocs/tab/tab_event.dart';
+import 'package:avallis/blocs/tab/tab_bloc.dart';
+import 'package:avallis/blocs/tab/tab_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

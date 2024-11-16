@@ -1,6 +1,6 @@
-import 'package:bold1/blocs/drawer_page_bloc.dart';
-import 'package:bold1/events/drawer_page_event.dart';
-import 'package:bold1/states/drawer_page_state.dart';
+import 'package:avallis/blocs/drawer_page_bloc.dart';
+import 'package:avallis/events/drawer_page_event.dart';
+import 'package:avallis/states/drawer_page_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

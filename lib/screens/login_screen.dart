@@ -1,7 +1,7 @@
 
-import 'package:bold1/blocs/login/login_bloc.dart';
-import 'package:bold1/blocs/login/login_event.dart';
-import 'package:bold1/blocs/login/login_state.dart';
+import 'package:avallis/blocs/login/login_bloc.dart';
+import 'package:avallis/blocs/login/login_event.dart';
+import 'package:avallis/blocs/login/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

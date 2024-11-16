@@ -1,4 +1,4 @@
-import 'package:bold1/blocs/client/client_modal.dart';
+import 'package:avallis/blocs/client/client_modal.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ClientState extends Equatable {

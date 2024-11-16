@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:bold1/blocs/tab/tab_event.dart';
-import 'package:bold1/blocs/tab/tab_state.dart';
+import 'package:avallis/blocs/tab/tab_event.dart';
+import 'package:avallis/blocs/tab/tab_state.dart';
 
 // Bloc
 class TabBloc extends Bloc<TabEvent, TabState> {

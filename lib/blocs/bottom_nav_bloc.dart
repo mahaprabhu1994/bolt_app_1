@@ -1,6 +1,6 @@
 // Bloc
-import 'package:bold1/events/bottom_nav_event.dart';
-import 'package:bold1/states/bottom_nav_state.dart';
+import 'package:avallis/events/bottom_nav_event.dart';
+import 'package:avallis/states/bottom_nav_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomNavBloc extends Bloc<BottomNavEvent, BottomNavState> {

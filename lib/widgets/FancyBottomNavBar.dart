@@ -1,8 +1,7 @@
-import 'package:bold1/blocs/bottom_nav_bloc.dart';
-import 'package:bold1/blocs/drawer_page_bloc.dart';
-import 'package:bold1/events/bottom_nav_event.dart';
-import 'package:bold1/events/drawer_page_event.dart';
-import 'package:bold1/states/bottom_nav_state.dart';
+import 'package:avallis/blocs/bottom_nav_bloc.dart';
+import 'package:avallis/blocs/drawer_page_bloc.dart';
+import 'package:avallis/events/drawer_page_event.dart';
+import 'package:avallis/states/bottom_nav_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,10 +38,9 @@ class FancyBottomNavBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(icons.length, (index) {
               return GestureDetector(
-                onTap: () =>
-
-                  context.read<DrawerPageBloc>().add(PageChanged(indexNo[index])),
-
+                onTap: () => context
+                    .read<DrawerPageBloc>()
+                    .add(PageChanged(indexNo[index])),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
@@ -64,7 +62,7 @@ class FancyBottomNavBar extends StatelessWidget {
                             : Colors.white.withOpacity(0.5),
                         size: 28,
                       ),
-                       const SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       // Text('${labels[index]}'),
                     ],
                   ),

@@ -1,13 +1,13 @@
-import 'package:bold1/blocs/drawer_page_bloc.dart';
-import 'package:bold1/blocs/login/login_bloc.dart';
-import 'package:bold1/blocs/login/login_state.dart';
-import 'package:bold1/events/drawer_page_event.dart';
-import 'package:bold1/screens/client_detail_screen.dart';
-import 'package:bold1/screens/client_screen.dart';
-import 'package:bold1/screens/dashboard_screen.dart';
-import 'package:bold1/states/drawer_page_state.dart';
-import 'package:bold1/widgets/FancyBottomNavBar.dart';
-import 'package:bold1/widgets/client_page/search_widget.dart';
+import 'package:avallis/blocs/drawer_page_bloc.dart';
+import 'package:avallis/blocs/login/login_bloc.dart';
+import 'package:avallis/blocs/login/login_state.dart';
+import 'package:avallis/events/drawer_page_event.dart';
+import 'package:avallis/screens/client_detail_screen.dart';
+import 'package:avallis/screens/client_screen.dart';
+import 'package:avallis/screens/dashboard_screen.dart';
+import 'package:avallis/states/drawer_page_state.dart';
+import 'package:avallis/widgets/FancyBottomNavBar.dart';
+import 'package:avallis/widgets/client_page/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/theme_bloc.dart';
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final List<Widget> _screens = [
-    DashBoardWidget(),
+    const DashBoardWidget(),
     const Center(child: Text('Search')),
     const Center(child: Text('Profile')),
     const Center(child: Text('Settings')),
@@ -58,26 +58,26 @@ class HomeScreen extends StatelessWidget {
               const Size.fromHeight(60.0), // Adjust the height as needed
           // Add space on top
           child: Padding(
-            padding: EdgeInsets.only(top: 0),
+            padding: const EdgeInsets.only(top: 0),
             child: AppBar(
               title: Padding(
-                padding: const EdgeInsets.only(top: 0.0),
-                child: BlocBuilder<LoginBloc,LoginState>(builder: (context,logstate){
-                  // Get the adviser name from login state
-                  final String adviserName = logstate is LoginSuccess
-                      ? logstate.loginResponse.adviserName ?? 'N/A'
-                      : 'N/A';
-                  return  Text(
-                    'Hi ${adviserName}!',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.w800,
-                      height: 0.06,
-                    ),
-                  );
-                })
-              ),
+                  padding: const EdgeInsets.only(top: 0.0),
+                  child: BlocBuilder<LoginBloc, LoginState>(
+                      builder: (context, logstate) {
+                    // Get the adviser name from login state
+                    final String adviserName = logstate is LoginSuccess
+                        ? logstate.loginResponse.adviserName ?? 'N/A'
+                        : 'N/A';
+                    return Text(
+                      'Hi $adviserName!',
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w800,
+                        height: 0.06,
+                      ),
+                    );
+                  })),
               automaticallyImplyLeading:
                   false, // Disable the default drawer icon
               leading: Builder(
@@ -111,211 +111,207 @@ class HomeScreen extends StatelessWidget {
         ),
         drawer: BlocBuilder<DrawerPageBloc, DrawerPageState>(
             builder: (context, drawerstate) {
-          return
-            BlocBuilder<LoginBloc,LoginState>(
-              builder: (context,loginstate){
+          return BlocBuilder<LoginBloc, LoginState>(
+            builder: (context, loginstate) {
+              // Get the adviser name from login state
+              final String adviserName = loginstate is LoginSuccess
+                  ? loginstate.loginResponse.adviserName ?? 'N/A'
+                  : 'N/A';
 
-                // Get the adviser name from login state
-                final String adviserName = loginstate is LoginSuccess
-                    ? loginstate.loginResponse.adviserName ?? 'N/A'
-                    : 'N/A';
+              // Get the first letter for the avatar
+              final String avatarLetter =
+                  adviserName.isNotEmpty ? adviserName[0].toUpperCase() : 'U';
 
-                // Get the first letter for the avatar
-                final String avatarLetter = adviserName.isNotEmpty
-                    ? adviserName[0].toUpperCase()
-                    : 'U';
-
-                ////staff Type
-                final String staffType = loginstate is LoginSuccess
+              ////staff Type
+              final String staffType = loginstate is LoginSuccess
                   ? loginstate.loginResponse.staffType ?? 'N/A'
                   : 'N/A';
-                return
-                  Container(
-                    //margin: const EdgeInsets.only(top: 50, bottom: 65),
+              return Container(
+                  //margin: const EdgeInsets.only(top: 50, bottom: 65),
 
-                      child: Drawer(
-                        child: SafeArea(
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                top: 50, bottom: 50), // Add top and bottom margins
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: ListView(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 50, horizontal: 20),
-                                    children: [
-                                      ListTile(
-                                          leading:  CircleAvatar(
-                                            backgroundColor: Colors.black,
-                                            child: Text(
-                                              avatarLetter,
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                          ),
-                                          title:  Text(adviserName),
-                                          subtitle:  Text(staffType),
-                                          trailing:
-                                          // Icon(Icons.green),
-                                          GestureDetector(
-                                            onTap: () {
-                                              print(
-                                                  "need to change the status of client");
-                                            },
-                                            child: Container(
-                                              width: 20, // Adjust size as needed
-                                              height: 20,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/green_tick.png'),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                borderRadius: BorderRadius.circular(8),
-                                              ),
-                                            ),
-                                          )),
-                                      const SizedBox(height: 20),
-                                      ListTile(
-                                        leading: const Icon(Icons.person,
-                                            color: Colors.yellow),
-                                        title: const Text('Home'),
-                                        onTap: () {
-                                          context
-                                              .read<DrawerPageBloc>()
-                                              .add(PageChanged(0));
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: const Icon(Icons.person),
-                                        title: const Text('Client Details'),
-                                        onTap: () {
-                                          context
-                                              .read<DrawerPageBloc>()
-                                              .add(PageChanged(1));
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: const Icon(Icons.policy),
-                                        title: const Text('Policy'),
-                                        onTap: () {
-                                          context
-                                              .read<DrawerPageBloc>()
-                                              .add(PageChanged(2));
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: const Icon(Icons.note),
-                                        title: const Text('Activity'),
-                                        onTap: () {
-                                          context
-                                              .read<DrawerPageBloc>()
-                                              .add(PageChanged(3));
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: const Icon(Icons.verified_user),
-                                        title: const Text('eKYC'),
-                                        onTap: () {
-                                          context
-                                              .read<DrawerPageBloc>()
-                                              .add(PageChanged(4));
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: const Icon(Icons.file_open),
-                                        title: const Text('FIPA'),
-                                        onTap: () {
-                                          context
-                                              .read<DrawerPageBloc>()
-                                              .add(PageChanged(5));
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: const Icon(Icons.group),
-                                        title: const Text("Your Team"),
-                                        onTap: () {
-                                          context
-                                              .read<DrawerPageBloc>()
-                                              .add(PageChanged(6));
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: const Icon(Icons.logout),
-                                        title: const Text('Log Out'),
-                                        onTap: () {
-                                          print("log out clicked");
-                                        },
-                                      ),
-
-                                      //  PageNavDrawer(icons: [
-                                      //   Icons.person,
-                                      //   Icons.policy,
-                                      //   Icons.note,
-                                      //   Icons.verified_user,
-                                      //   Icons.file_open,
-                                      //   Icons.group,
-                                      //   Icons.logout,
-                                      // ],
-                                      //   labels: ['Client Details', 'Policy', 'Activity', 'eKYC','FIPA','Your Team','Logout'],
-                                      // )
-                                    ],
+                  child: Drawer(
+                    // shadowColor: Colors.amber,
+                // surfaceTintColor: Colors.deepOrange,
+                child: SafeArea(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                        top: 50, bottom: 50), // Add top and bottom margins
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListView(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 50, horizontal: 20),
+                            children: [
+                              ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    child: Text(
+                                      avatarLetter,
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(isDarkMode ? 'Dark Mode' : 'Light Mode'),
-                                      // Switch(
-                                      //   value:
-                                      //       false, // You should use a state variable here
-                                      //   onChanged: (bool value) {
-
-                                      //   },
-                                      // ),
-
-                                      IconButton(
-                                        icon: const Icon(Icons.brightness_6),
-                                        onPressed: () {
-                                          context.read<ThemeBloc>().add(ToggleTheme());
-                                          //Navigator.pop(context);
-                                        },
+                                  title: Text(adviserName),
+                                  subtitle: Text(staffType),
+                                  trailing:
+                                      // Icon(Icons.green),
+                                      GestureDetector(
+                                    onTap: () {
+                                      print(
+                                          "need to change the status of client");
+                                    },
+                                    child: Container(
+                                      width: 20, // Adjust size as needed
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        image: const DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/green_tick.png'),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                                    ),
+                                  )),
+                              const SizedBox(height: 20),
+                              ListTile(
+                                leading: const Icon(Icons.person,
+                                    color: Colors.yellow),
+                                title: const Text('Home'),
+                                onTap: () {
+                                  context
+                                      .read<DrawerPageBloc>()
+                                      .add(PageChanged(0));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.person),
+                                title: const Text('Client Details'),
+                                onTap: () {
+                                  context
+                                      .read<DrawerPageBloc>()
+                                      .add(PageChanged(1));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.policy),
+                                title: const Text('Policy'),
+                                onTap: () {
+                                  context
+                                      .read<DrawerPageBloc>()
+                                      .add(PageChanged(2));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.note),
+                                title: const Text('Activity'),
+                                onTap: () {
+                                  context
+                                      .read<DrawerPageBloc>()
+                                      .add(PageChanged(3));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.verified_user),
+                                title: const Text('eKYC'),
+                                onTap: () {
+                                  context
+                                      .read<DrawerPageBloc>()
+                                      .add(PageChanged(4));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.file_open),
+                                title: const Text('FIPA'),
+                                onTap: () {
+                                  context
+                                      .read<DrawerPageBloc>()
+                                      .add(PageChanged(5));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.group),
+                                title: const Text("Your Team"),
+                                onTap: () {
+                                  context
+                                      .read<DrawerPageBloc>()
+                                      .add(PageChanged(6));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.logout),
+                                title: const Text('Log Out'),
+                                onTap: () {
+                                  print("log out clicked");
+                                },
+                              ),
+
+                              //  PageNavDrawer(icons: [
+                              //   Icons.person,
+                              //   Icons.policy,
+                              //   Icons.note,
+                              //   Icons.verified_user,
+                              //   Icons.file_open,
+                              //   Icons.group,
+                              //   Icons.logout,
+                              // ],
+                              //   labels: ['Client Details', 'Policy', 'Activity', 'eKYC','FIPA','Your Team','Logout'],
+                              // )
+                            ],
                           ),
                         ),
-                      ));
-              },
-            );
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(isDarkMode ? 'Dark Mode' : 'Light Mode'),
+                              // Switch(
+                              //   value:
+                              //       false, // You should use a state variable here
+                              //   onChanged: (bool value) {
 
+                              //   },
+                              // ),
+
+                              IconButton(
+                                icon: const Icon(Icons.brightness_6),
+                                onPressed: () {
+                                  context.read<ThemeBloc>().add(ToggleTheme());
+                                  //Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ));
+            },
+          );
         }),
         body: BlocBuilder<DrawerPageBloc, DrawerPageState>(
           builder: (context, state) {
-            return
-              BlocBuilder<LoginBloc,LoginState>(
-                builder: (context,loginstate){
+            return BlocBuilder<LoginBloc, LoginState>(
+                builder: (context, loginstate) {
+              // Get the adviser name from login state
+              final String adviserId = loginstate is LoginSuccess
+                  ? loginstate.loginResponse.adviserId ?? 'N/A'
+                  : 'N/A';
 
-                  // Get the adviser name from login state
-                  final String adviserId = loginstate is LoginSuccess
-                      ? loginstate.loginResponse.adviserId ?? 'N/A'
-                      : 'N/A';
-
-                  return
-              _getPage(state.selectedIndex , adviserId);});
+              return _getPage(state.selectedIndex, adviserId);
+            });
             // return Center(child: Text("select the page"),);
           },
         ),
@@ -336,46 +332,48 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Widget _getPage(int index,String adviserId) {
+Widget _getPage(int index, String adviserId) {
   switch (index) {
     case 0:
-      return DashBoardWidget();
+      return const DashBoardWidget();
     case 1:
-      return SearchWidget( adviserId: adviserId,);
+      return SearchWidget(
+        adviserId: adviserId,
+      );
     case 2:
-      return Center(
+      return const Center(
         child: Text("Page Policy"),
       );
     case 3:
-      return Center(
+      return const Center(
         child: Text("Activity"),
       );
     case 4:
-      return Center(
+      return const Center(
         child: Text("eKYC"),
       );
     case 5:
-      return Center(
+      return const Center(
         child: Text("FPMS"),
       );
     case 6:
-      return Center(
+      return const Center(
         child: Text("Your Team"),
       );
     case 7:
-      return DashBoardWidget();
+      return const DashBoardWidget();
     case 8:
-      return SearchWidget(adviserId:adviserId);
+      return SearchWidget(adviserId: adviserId);
     case 9:
-      return Center(
+      return const Center(
         child: Text("Activity Page"),
       );
     case 10:
-      return Center(
+      return const Center(
         child: Text("settings page"),
       );
 
     default:
-      return DashBoardWidget();
+      return const DashBoardWidget();
   }
 }

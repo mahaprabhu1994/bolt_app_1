@@ -1,4 +1,5 @@
 // Main widget with search field
+import 'package:avallis/constants.dart';
 import 'package:flutter/material.dart';
 
 class ClientSearchSection extends StatelessWidget {
@@ -225,7 +226,8 @@ class _ClientFilterModalState extends State<ClientFilterModal> {
                     value: _selectedGender,
                     label: 'Gender',
                     icon: Icons.people_outline,
-                    items: ['Male', 'Female', 'Other'],
+                    // items: ['Male', 'Female', 'Other'],
+                    items:client_gender,
                     onChanged: (value) => setState(() => _selectedGender = value),
                     context: context,
                   ),
@@ -234,7 +236,8 @@ class _ClientFilterModalState extends State<ClientFilterModal> {
                     value: _selectedCategory,
                     label: 'Category',
                     icon: Icons.category_outlined,
-                    items: ['Person', 'Company',],
+                    // items: ['Person', 'Company',],
+                    items:client_category,
                     onChanged: (value) => setState(() => _selectedCategory = value),
                     context: context,
                   ),
@@ -243,7 +246,8 @@ class _ClientFilterModalState extends State<ClientFilterModal> {
                     value: _selectedStatus,
                     label: 'Status',
                     icon: Icons.info_outline,
-                    items: ['A-Applicant', 'S-Suspect', 'P-Prospect','CP-Client Re-Prospect','SA-Client Re-Applicant'],
+                    // items: ['A-Applicant', 'S-Suspect', 'P-Prospect','CP-Client Re-Prospect','SA-Client Re-Applicant'],
+                    items:client_status,
                     onChanged: (value) => setState(() => _selectedStatus = value),
                     context: context,
                   ),

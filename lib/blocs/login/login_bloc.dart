@@ -3,10 +3,10 @@ import 'dart:convert';
 
 
 import 'package:bloc/bloc.dart';
-import 'package:bold1/api_constants.dart';
-import 'package:bold1/blocs/login/login_event.dart';
-import 'package:bold1/blocs/login/login_modal.dart';
-import 'package:bold1/blocs/login/login_state.dart';
+import 'package:avallis/api_constants.dart';
+import 'package:avallis/blocs/login/login_event.dart';
+import 'package:avallis/blocs/login/login_modal.dart';
+import 'package:avallis/blocs/login/login_state.dart';
 import 'package:http/http.dart' as http;
 
 class LoginBloc extends Bloc<LoginEvent,LoginState> {

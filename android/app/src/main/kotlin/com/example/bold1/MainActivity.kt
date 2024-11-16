@@ -1,4 +1,4 @@
-package com.example.bold1
+package com.example.avallis
 
 import io.flutter.embedding.android.FlutterActivity
 
