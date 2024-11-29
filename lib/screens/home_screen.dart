@@ -5,6 +5,7 @@ import 'package:avallis/events/drawer_page_event.dart';
 import 'package:avallis/screens/client_detail_screen.dart';
 import 'package:avallis/screens/client_screen.dart';
 import 'package:avallis/screens/dashboard_screen.dart';
+import 'package:avallis/screens/fna_approval_screen.dart';
 import 'package:avallis/states/drawer_page_state.dart';
 import 'package:avallis/widgets/FancyBottomNavBar.dart';
 import 'package:avallis/widgets/client_page/search_widget.dart';
@@ -33,6 +34,7 @@ class HomeScreen extends StatelessWidget {
     const Center(child: Text('Client')),
     const Center(child: Text('Policy')),
     const Center(child: Text('Activity')),
+    // const Center(child: Text('Approval')),
     const Center(child: Text('eKYC')),
     const Center(child: Text('FIPA')),
     const Center(child: Text('Your Team')),
@@ -217,6 +219,16 @@ class HomeScreen extends StatelessWidget {
                                 },
                               ),
                               ListTile(
+                                leading: const Icon(Icons.approval),
+                                title: const Text('Approval'),
+                                onTap: () {
+                                  context
+                                      .read<DrawerPageBloc>()
+                                      .add(PageChanged(11));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
                                 leading: const Icon(Icons.verified_user),
                                 title: const Text('eKYC'),
                                 onTap: () {
@@ -354,7 +366,7 @@ Widget _getPage(int index, String adviserId) {
       );
     case 5:
       return const Center(
-        child: Text("FPMS"),
+        child: Text("FIPA"),
       );
     case 6:
       return const Center(
@@ -371,6 +383,12 @@ Widget _getPage(int index, String adviserId) {
     case 10:
       return const Center(
         child: Text("settings page"),
+      );
+    case 11:
+      return const Center(
+        child:
+        // Text("Approval"),
+        FnaApprovalScreen(advisorId: 'ADVFPF00000000000058',)
       );
 
     default:

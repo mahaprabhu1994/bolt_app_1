@@ -1,5 +1,6 @@
 import 'package:avallis/blocs/tab/tab_bloc.dart';
 import 'package:avallis/blocs/tab/tab_event.dart';
+import 'package:avallis/screens/fna_approval_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -67,6 +68,26 @@ class CommonDrawer extends StatelessWidget {
               },
             ),
             ListTile(
+              title: const Text('Approval'),
+              leading: const Icon(Icons.edit_document),
+              // onTap: () {
+              //   print("Drawer lsitTile open cloe");
+              //   context.read<TabBloc>().add(SelectTab(11));
+              //   Navigator.pop(context);
+              // },
+
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FnaApprovalScreen(
+                      advisorId: 'ADVFPF00000000000058',
+                    ),
+                  ),
+                );
+              },
+            ),
+            ListTile(
               title: const Text('eKYC'),
               leading: const Icon(Icons.edit_document),
               onTap: () {
@@ -76,10 +97,10 @@ class CommonDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text('Production'),
-              leading: const Icon(Icons.precision_manufacturing),
+              title: const Text('FIPA'),
+              leading: const Icon(Icons.approval),
               onTap: () {
-                print("Drawer lsitTile open cloe");
+                print("Approval is clicked");
                 context.read<TabBloc>().add(SelectTab(5));
                 Navigator.pop(context);
               },
@@ -93,6 +114,16 @@ class CommonDrawer extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+            // ListTile(
+            //   title: const Text('Production'),
+            //   leading: const Icon(Icons.precision_manufacturing),
+            //   onTap: () {
+            //     print("Drawer lsitTile open cloe");
+            //     context.read<TabBloc>().add(SelectTab(6));
+            //     Navigator.pop(context);
+            //   },
+            // ),
+
           ],
         ),
       ),

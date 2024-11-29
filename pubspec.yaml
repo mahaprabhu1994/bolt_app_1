@@ -50,6 +50,7 @@ dev_dependencies:
   smooth_page_indicator: ^1.2.0+3
   intl_utils: ^2.8.7
   carousel_slider: ^4.2.1
+  dio: ^5.7.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

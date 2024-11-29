@@ -1,3 +1,4 @@
+import 'package:avallis/blocs/approval/fna_approval_bloc.dart';
 import 'package:avallis/blocs/bottom_nav_bloc.dart';
 import 'package:avallis/blocs/client/client_bloc.dart';
 import 'package:avallis/blocs/client/client_repository.dart';
@@ -6,6 +7,7 @@ import 'package:avallis/blocs/login/login_bloc.dart';
 import 'package:avallis/blocs/policy/underwriting_bloc.dart';
 import 'package:avallis/blocs/tab/tab_bloc.dart';
 import 'package:avallis/pages/onBoardingPage/onboardingscreen.dart';
+import 'package:avallis/service/approval_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -64,6 +66,9 @@ class MyApp extends StatelessWidget {
           create: (context) => ClientBloc(
             repository: ClientRepository(),
           ),
+        ),
+        BlocProvider(
+          create: (_) => FnaApprovalBloc(apiService: ApiService()),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
